@@ -1,22 +1,24 @@
 import { NextFunction, Request, Response } from 'express';
 import client from 'prom-client';
 
-const requestCounter = new client.Counter({
-  name: 'http_request_total',
-  help: 'Total number of HTTP requests',
+const activeRequestGauge = new client.Gauge({
+  name: 'active_requests',
+  help: 'Number of active requests',
   labelNames: ['methods', 'route', 'status_code'],
 });
 
-export const requestCountMiddleWare = (
+export const requuestGaugeMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const startTime = Date.now();
+  activeRequestGauge.inc({
+    methods: req.method,
+    route: req.route ? req.route.path : req.path,
+    status_code: res.statusCode,
+  });
   res.on('finish', () => {
-    const endTime = Date.now();
-    console.log(`Request took ${endTime - startTime}ms`);
-    requestCounter.inc({
+    activeRequestGauge.dec({
       methods: req.method,
       route: req.route ? req.route.path : req.path,
       status_code: res.statusCode,

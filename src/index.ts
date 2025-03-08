@@ -2,11 +2,15 @@ import express from 'express';
 import { middleware } from './middleware';
 import { requestCountMiddleWare } from './metrics/requestCount';
 import client from 'prom-client';
+import { requuestGaugeMiddleware } from './metrics/requestGauge';
+import { requestHistoGramMiddleWare } from './metrics/requestHistorgram';
 
 const app = express();
 app.use(express.json());
 app.use(middleware);
 app.use(requestCountMiddleWare);
+app.use(requuestGaugeMiddleware);
+app.use(requestHistoGramMiddleWare);
 
 app.get('/user', (req, res) => {
   res.send({

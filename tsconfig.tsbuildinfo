@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/middleware.ts","./src/metrics/requestcount.ts"],"version":"5.8.2"}
+{"root":["./src/index.ts","./src/middleware.ts","./src/metrics/requestcount.ts","./src/metrics/requestgauge.ts","./src/metrics/requesthistorgram.ts"],"version":"5.8.2"}
