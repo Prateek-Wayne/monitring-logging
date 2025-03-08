@@ -1,0 +1,18 @@
+{
+  "name": "monitring-logging",
+  "version": "1.0.0",
+  "description": "Sample Repo for praciticing logging and monitoring",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "start": "npm run build && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "express": "^4.21.2",
+    "prom-client": "^15.1.3"
+  }
+}
